@@ -1,0 +1,304 @@
+var tentativastxt = document.getElementById ("tentativas");
+
+
+var tentativasRestantes = 8;
+var tentativasUsadas = 0;
+
+const personagens = [
+    {
+        nome: "Saori",
+        classe: "Divindade",
+        idade: "16",
+        saga: "Guerra Galáctica",
+        pais: "Grécia"
+    },
+    {
+        nome: "Hades",
+        classe: "Divindade",
+        idade: "Indenfinido",
+        saga: "Hades",
+        pais: "Grécia"
+    },
+    {
+        nome: "Julian Solo(Poseidon)",
+        classe: "Divindade",
+        idade: "16",
+        saga: "Poseidon",
+        pais: "Grécia"
+    },
+    {
+        nome: "Ikki",
+        classe: "Bronze",
+        idade: "15",
+        saga: "Guerra Galáctica",
+        pais: "Japão"
+    },
+    {
+        nome: "Hyoga",
+        classe: "Bronze",
+        idade: "14",
+        saga: "Guerra Galáctica",
+        pais: "Rússia"
+    },
+    {
+        nome: "Shiryu",
+        classe: "Bronze",
+        idade: "14",
+        saga: "Guerra Galáctica",
+        pais: "Japão"
+    },
+    {
+        nome: "Seiya",
+        classe: "Bronze",
+        idade: "13",
+        saga: "Guerra Galáctica",
+        pais: "Japão"
+    },
+    {
+        nome: "Shaina",
+        classe: "Prata",
+        idade: "16",
+        saga: "Guerra Galáctica",
+        pais: "Grécia"
+    },
+    {
+        nome: "Marin",
+        classe: "Prata",
+        idade: "16",
+        saga: "Guerra Galáctica",
+        pais: "Japão"
+    },
+    {
+        nome: "Mu",
+        classe: "Ouro",
+        idade: "20",
+        saga: "Santuário",
+        pais: "Tibet"
+    },
+    {
+        nome: "Aldebaran",
+        classe: "Ouro",
+        idade: "20",
+        saga: "Santuário",
+        pais: "Brasil"
+    },
+    {
+        nome: "Saga",
+        classe: "Ouro",
+        idade: "28",
+        saga: "Santuário",
+        pais: "Grécia"
+    },
+    {
+        nome: "Máscara da Morte",
+        classe: "Ouro",
+        idade: "23",
+        saga: "Santuário",
+        pais: "Itália"
+    },
+    {
+        nome: "Aiolia",
+        classe: "Ouro",
+        idade: "20",
+        saga: "Santuário",
+        pais: "Grécia"
+    },
+    {
+        nome: "Shaka",
+        classe: "Ouro",
+        idade: "20",
+        saga: "Santuário",
+        pais: "Índia"
+    },
+    {
+        nome: "Dohko",
+        classe: "Ouro",
+        idade: "200+",
+        saga: "Santuário",
+        pais: "China"
+    },
+    {
+        nome: "Shion",
+        classe: "Ouro",
+        idade: "200+",
+        saga: "Hades",
+        pais: "Tibet"
+    },
+    {
+        nome: "Milo",
+        classe: "Ouro",
+        idade: "20",
+        saga: "Santuário",
+        pais: "Grécia"
+    },
+    {
+        nome: "Shura",
+        classe: "Ouro",
+        idade: "23",
+        saga: "Santuário",
+        pais: "Espanha"
+    },
+    {
+        nome: "Aiolos",
+        classe: "Ouro",
+        idade: "14",
+        saga: "Santuário",
+        pais: "Grécia"
+    },
+    {
+        nome: "Camus",
+        classe: "Ouro",
+        idade: "20",
+        saga: "Santuário",
+        pais: "França"
+    },
+    {
+        nome: "Afrodite",
+        classe: "Ouro",
+        idade: "22",
+        saga: "Santuário",
+        pais: "Suécia"
+    }
+];
+
+
+const personagemDoDia = personagens[Math.floor(Math.random() * personagens.length)];
+
+
+// Seleciona os elementos HTML
+const inputField = document.getElementById('input');
+const okButton = document.querySelector('button');
+
+
+function addAnswerSection() {
+    const characterName = inputField.value.trim();
+    const personagem = personagens.find(p => p.nome.toLowerCase() === characterName.toLowerCase());
+
+    inputField.value = "";
+
+   
+    if (personagem) {
+   
+        const mainContainer = document.querySelector('main');
+        const container = document.createElement('div');
+        container.classList.add('answer');
+
+      
+        const data = [
+            { id: 'nome', text: personagem.nome, correto: personagem.nome === personagemDoDia.nome },
+            { id: 'Classe', text: personagem.classe, correto: personagem.classe === personagemDoDia.classe },
+            { id: 'Idade', text: personagem.idade, correto: personagem.idade === personagemDoDia.idade },
+            { id: 'Saga', text: personagem.saga, correto: personagem.saga === personagemDoDia.saga },
+            { id: 'Nacionalidade', text: personagem.pais, correto: personagem.pais === personagemDoDia.pais}
+        ];
+
+        // Cria e adiciona cada caixa ao container
+        data.forEach(item => {
+            const caixaDiv = document.createElement('div');
+            caixaDiv.classList.add('caixa');
+            if(item.correto){
+                caixaDiv.classList.add('certo');
+            }
+            else{
+                caixaDiv.classList.add('errado');
+            }
+            caixaDiv.id = item.id;
+            caixaDiv.textContent = item.text;
+            container.appendChild(caixaDiv);
+        });
+
+        if(personagem === personagemDoDia){
+            alert(`Parabéns você concluiu em ${tentativasUsadas} tentativas`)
+            location.reload();
+        }
+        else{
+            tentativasRestantes -= 1;
+            tentativasUsadas += 1;
+            tentativastxt.innerHTML = `Você tem: ${tentativasRestantes} tentativas`
+            if(tentativasRestantes < 0){
+                alert(`Você perdeu o personagem era: ${personagemDoDia.nome}`)
+                location.reload();
+            }
+            
+        }
+
+
+        // Adiciona o container ao corpo da página
+        mainContainer.appendChild(container);
+    } else {
+        alert("Personagem não encontrado.");
+    }
+}
+
+// Evento para pressionar "Enter" no campo de entrada
+inputField.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        addAnswerSection();
+    }
+});
+
+// Evento ao clicar no botão "OK"
+okButton.addEventListener('click', addAnswerSection);
+
+
+
+
+
+
+
+// Text box formatation
+
+input.onfocus = function () {
+  characters.style.display = 'block';
+  input.style.borderRadius = "5px 5px 0 0";  
+};
+for (let option of characters.options) {
+  option.onclick = function () {
+    input.value = option.value;
+    characters.style.display = 'none';
+    input.style.borderRadius = "5px";
+  }
+};
+
+input.oninput = function() {
+  currentFocus = -1;
+  var text = input.value.toUpperCase();
+  for (let option of characters.options) {
+    if(option.value.toUpperCase().indexOf(text) > -1){
+      option.style.display = "block";
+  }else{
+    option.style.display = "none";
+    }
+  };
+}
+var currentFocus = -1;
+input.onkeydown = function(e) {
+  if(e.keyCode == 40){
+    currentFocus++
+   addActive(characters.options);
+  }
+  else if(e.keyCode == 38){
+    currentFocus--
+   addActive(characters.options);
+  }
+  else if(e.keyCode == 13){
+    e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (characters.options) characters.options[currentFocus].click();
+        }
+  }
+}
+
+function addActive(x) {
+    if (!x) return false;
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    x[currentFocus].classList.add("active");
+  }
+  function removeActive(x) {
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("active");
+    }
+  }
