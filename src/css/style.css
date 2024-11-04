@@ -1,5 +1,8 @@
 body{
-    background-color: gainsboro;
+    background-image: url("../img/wallpaper.png");
+    background-size: cover ;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,27 +18,50 @@ body{
     display: flex;
 }
 
+#tentativas {
+  background-color: rgb(24, 24, 24);
+  color: gold
+}
+
 .legendatext{
     display: flex;
-    width: 10vw;
+    color: gold;
+    background-color: rgb(24, 24, 24);
+    font-size: 20px;
+    width: 130px;
     justify-content: center;
     align-items: center;
-    margin: 2vh 2vw;
+    margin: 20px 25px;
+    border-radius: 10px;
 }
 
 .caixa{
+  border-radius: 10px;
     display: flex;
     text-align: center;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
     background-color: gray;
-    height: 10vw ;
-    width: 10vw;
+    height: 130px ;
+    width: 130px ;
     justify-content: center;
     align-items: center;
-    margin: 2vh 2vw;
+    margin: 5px 25px;
+}
+
+.caixa img {
+  width: 70%;
+  padding-bottom : 0 ;
+}
+
+#nome p {
+  margin: 0;
 }
 
 .errado{
     background-color: red;
+    color: white;
 }
 
 main{display: flex;
@@ -45,22 +71,22 @@ flex-direction: column-reverse;}
     background-color: green;
 }
     fieldset {
-        border: 1px solid blue;
-        
+        border: 1px solid gold;
+        background-color: rgb(24, 24, 24);
         border-radius: 5px;
         
       }
     button{
         height: 7vh;
-        color: blue;
-        border: 1px solid blue;
+        color: gold;
+        border: 1px solid gold;
         border-radius: 5px;
         padding: 10px;
     
     }
       
       legend, label{
-        color: blue; 
+        color: gold; 
         font-size: 24px;
         font-family: sans-serif;
       }
@@ -70,16 +96,17 @@ flex-direction: column-reverse;}
         padding: 5px;
         height: 5vh;
         width: 30vw;
-        border: 1px solid blue;
+        background-color: rgb(26, 26, 26);
+        border: 1px solid gold;
         outline: none;
         border-radius: 5px;
-        color: blue;
+        color: gold;
       /*   border-bottom: none; */
       }
       datalist {
         position: absolute;
-        background-color: white;
-        border: 1px solid blue;
+        background-color: rgb(53, 53, 53);
+        border: 1px solid gold;
         border-radius: 0 0 5px 5px;
         border-top: none;
         font-family: sans-serif;
@@ -91,9 +118,9 @@ flex-direction: column-reverse;}
       }
       
       option {
-        background-color: white;
+        background-color:  rgb(53, 53, 53);
         padding: 4px;
-        color: blue;
+        color: gold;
         margin-bottom: 1px;
          font-size: 18px;
         cursor: pointer;
@@ -102,3 +129,48 @@ flex-direction: column-reverse;}
       option:hover,  .active{
         background-color: lightblue;
       }
+
+option img{
+    height: 30px;
+}
+
+@media (max-width: 600px) {
+  .legendatext {
+      font-size: 9px; /* Ajusta o tamanho da fonte para telas menores */
+      width: 60px; /* Ajusta a largura da legenda em telas menores */
+      margin: 1.2vw; /* Ajusta a margem */
+  }
+
+  .caixa {
+      height: 100px; /* Reduz a altura das caixas */
+      font-size: 10px;
+      width: 65px;
+      height: 65px; /* Reduz a largura das caixas */
+      margin: 1vw; /* Margem leve para separar as caixas */
+  }
+  #nome p{
+    font-size: 8px;
+  }
+
+  button {
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      width: 10%; /* Largura do botão para caber em telas menores */
+      font-size: 150%; /* Tamanho da fonte ajustado para botões */
+  }
+  fieldset{
+    width: 90%;
+  }
+
+  input {
+      width: 80%; /* Ajusta a largura do campo de entrada */
+      font-size: 16px; /* Tamanho da fonte ajustado para inputs */
+  }
+
+  /* Ajusta a largura das caixas e legendas para não sair da tela */
+  .answer {
+      flex-direction: row; /* Mantém as caixas na mesma linha */
+      justify-content: space-evenly; /* Distribui uniformemente as caixas */
+  }
+}

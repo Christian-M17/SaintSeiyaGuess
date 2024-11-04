@@ -158,6 +158,13 @@ const personagens = [
         idade: "22",
         saga: "Santuário",
         pais: "Suécia"
+    },
+    {
+        nome: "Shun",
+        classe: "Bronze",
+        idade: "13",
+        saga: "Guerra Galáctica",
+        pais: "Grécia"
     }
 ];
 
@@ -185,25 +192,41 @@ function addAnswerSection() {
 
       
         const data = [
-            { id: 'nome', text: personagem.nome, correto: personagem.nome === personagemDoDia.nome },
+            { id: 'nome', text: personagem.nome, correto: personagem.nome === personagemDoDia.nome,  imagem: `src/img/${personagem.nome.toLowerCase().replace(/ /g, '_')}.jpg`  },
             { id: 'Classe', text: personagem.classe, correto: personagem.classe === personagemDoDia.classe },
             { id: 'Idade', text: personagem.idade, correto: personagem.idade === personagemDoDia.idade },
             { id: 'Saga', text: personagem.saga, correto: personagem.saga === personagemDoDia.saga },
-            { id: 'Nacionalidade', text: personagem.pais, correto: personagem.pais === personagemDoDia.pais}
+            { id: 'Nacionalidade', text: personagem.pais, correto: personagem.pais === personagemDoDia.pais }
         ];
-
+        
         // Cria e adiciona cada caixa ao container
         data.forEach(item => {
             const caixaDiv = document.createElement('div');
             caixaDiv.classList.add('caixa');
-            if(item.correto){
+        
+            if(item.correto) {
                 caixaDiv.classList.add('certo');
-            }
-            else{
+            } else {
                 caixaDiv.classList.add('errado');
             }
+            
             caixaDiv.id = item.id;
-            caixaDiv.textContent = item.text;
+        
+            // Verifica se o item é da categoria 'nome' para adicionar uma imagem
+            if (item.id === 'nome' && item.imagem) {
+                const img = document.createElement('img');
+                img.src = item.imagem;
+                img.alt = `Imagem de ${item.text}`;
+                img.classList.add('imagem-personagem'); // Adicione uma classe CSS para estilizar a imagem se necessário
+                caixaDiv.appendChild(img);
+                
+            }
+        
+            // Adiciona o texto
+            const textNode = document.createElement('p');
+            textNode.textContent = item.text;
+            caixaDiv.appendChild(textNode);
+        
             container.appendChild(caixaDiv);
         });
 
